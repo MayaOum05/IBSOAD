@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://vmj5bydlcn63"]
+
+[ext_resource type="Script" uid="uid://cnvm68hmj3d18" path="res://Scenes/hipocampus_trigger.gd" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://d3msru1jwlb35" path="res://Scenes/player.gd" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://b7sri7gnppawb" path="res://Scenes/hippocampus_trigger_2.gd" id="3_jjvhh"]
+[ext_resource type="Script" uid="uid://dsewwplrgdyjn" path="res://Scenes/hippocampus_trigger_3.gd" id="4_kry3j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8gbba"]
+sky_material = SubResource("ProceduralSkyMaterial_bo1nx")
+
+[sub_resource type="Environment" id="Environment_jjvhh"]
+background_mode = 2
+sky = SubResource("Sky_8gbba")
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_57qmd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_57qmd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(1, 1.048706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yf5fn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_57qmd"]
+
+[node name="Main" type="Node3D" unique_id=601091813]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1940462667]
+environment = SubResource("Environment_jjvhh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=236436443]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0.8633919, 3.1775923, -4.898594)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1094363594]
+disable_mode = 2
+script = ExtResource("2_bo1nx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=213200808]
+shape = SubResource("CapsuleShape3D_57qmd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=61834871]
+transform = Transform3D(0.9996099, 0.0010035903, -0.027911685, -0.0032876749, 0.9966345, -0.081907704, 0.027735546, 0.08196752, 0.996249, 0, -0.9, 4.465)
+mesh = SubResource("CapsuleMesh_57qmd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1049611834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3246765, -2.245637, -9.722063)
+use_collision = true
+size = Vector3(4.789734, 1, 36.339725)
+
+[node name="Camera3D" type="Camera3D" parent="CSGBox3D" unique_id=1897959330]
+transform = Transform3D(0.9868563, 0.07430073, -0.14350685, 0.033709977, 0.773848, 0.63247406, 0.15804577, -0.62899846, 0.76117194, 0, 3.834, 16.17)
+keep_aspect = 0
+current = true
+fov = 122.21413
+
+[node name="Hippocampus" type="MeshInstance3D" parent="." unique_id=414353636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="HippocampusTrigger1" type="Area3D" parent="Hippocampus" unique_id=1543717779]
+transform = Transform3D(0.99999124, -0.0013677641, -0.0039515933, 0.0013820867, 0.9999925, 0.0036263322, 0.003946607, -0.0036317585, 0.99998564, 0, 0, 0)
+script = ExtResource("1_jjgbg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hippocampus/HippocampusTrigger1" unique_id=32655258]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_kry3j")
+
+[node name="HippocampusTrigger3" type="Area3D" parent="Hippocampus" unique_id=1171878565]
+transform = Transform3D(0.99999124, -0.0013677641, -0.0039515933, 0.0013820867, 0.9999925, 0.0036263322, 0.003946607, -0.0036317585, 0.99998564, 0, 0, -10)
+script = ExtResource("4_kry3j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hippocampus/HippocampusTrigger3" unique_id=1396868249]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hippocampus/HippocampusTrigger3" unique_id=1647804895]
+mesh = SubResource("BoxMesh_yf5fn")
+
+[node name="HippocampusTrigger2" type="Area3D" parent="Hippocampus" unique_id=1895836541]
+transform = Transform3D(0.99999124, -0.0013677641, -0.0039515933, 0.0013820867, 0.9999925, 0.0036263322, 0.003946607, -0.0036317585, 0.99998564, 0, 0, -5)
+visibility_parent = NodePath("..")
+script = ExtResource("3_jjvhh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hippocampus/HippocampusTrigger2" unique_id=350023363]
+transform = Transform3D(2, -1.1459633e-10, 0, 3.0013325e-10, 2, -4.656613e-10, 0, 0, 2, 0, 0.04870653, 0)
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hippocampus/HippocampusTrigger2" unique_id=724492408]
+mesh = SubResource("BoxMesh_57qmd")
+
+[connection signal="body_entered" from="Hippocampus/HippocampusTrigger1" to="Hippocampus/HippocampusTrigger1" method="_on_body_entered"]
+[connection signal="body_entered" from="Hippocampus/HippocampusTrigger3" to="Hippocampus/HippocampusTrigger3" method="_on_body_entered"]
+[connection signal="body_entered" from="Hippocampus/HippocampusTrigger2" to="Hippocampus/HippocampusTrigger2" method="_on_body_entered"]
