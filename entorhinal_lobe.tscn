@@ -1,0 +1,293 @@
+[gd_scene format=3 uid="uid://d25r8krvjl4vg"]
+
+[ext_resource type="Script" uid="uid://d3msru1jwlb35" path="res://Scenes/player.gd" id="1_enfvv"]
+[ext_resource type="PackedScene" uid="uid://dxu2vbf66ic83" path="res://assets/zombie.glb" id="2_1njsv"]
+[ext_resource type="Animation" uid="uid://bk32wjv8gpvx0" path="res://assets/charcters/Idle.res" id="3_7eh48"]
+[ext_resource type="Animation" uid="uid://phpes1tsu53k" path="res://assets/charcters/Run.res" id="4_ijku1"]
+
+[sub_resource type="Environment" id="Environment_v2v6y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enfvv"]
+albedo_color = Color(0.7519774, 0.2905374, 3.85046e-07, 1)
+uv1_triplanar = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgqql"]
+_data = {
+&"Idle": ExtResource("3_7eh48")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_otvn0"]
+_data = {
+&"Run": ExtResource("4_ijku1")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1njsv"]
+animation = &"run/Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7eh48"]
+animation = &"idle/Idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ijku1"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yf5fn"]
+graph_offset = Vector2(-464.7714, -21.46294)
+nodes/idle/node = SubResource("AnimationNodeAnimation_7eh48")
+nodes/idle/position = Vector2(-144, 192)
+"nodes/anim run/node" = SubResource("AnimationNodeAnimation_1njsv")
+"nodes/anim run/position" = Vector2(96, 272)
+nodes/run/node = SubResource("AnimationNodeBlend2_ijku1")
+nodes/run/position = Vector2(112, 64)
+node_connections = [&"output", 0, &"run", &"run", 0, &"idle", &"run", 1, &"anim run"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gngh"]
+size = Vector3(1.4106445, 2004.3032, 26.554749)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fcnqv"]
+size = Vector3(18.11493, 1, 0.67626953)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7numd"]
+size = Vector3(6.3477783, 1, 1)
+
+[node name="Entorhinal_Lobe" type="Node3D" unique_id=484095537]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=363674778]
+environment = SubResource("Environment_v2v6y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1916216389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8046465, 8.944926, 0)
+sky_mode = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1280329636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.366398, -0.61257327, -12.535208)
+use_collision = true
+size = Vector3(24.697632, 0.28234863, 26.763367)
+material = SubResource("StandardMaterial3D_enfvv")
+
+[node name="BarrierLarge3" type="MeshInstance3D" parent="CSGBox3D" unique_id=996305771]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9806252, -0.494794, 3.466237)
+
+[node name="BarrierLarge6" type="MeshInstance3D" parent="CSGBox3D" unique_id=1410288047]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.5802, -0.494794, -6.3031464)
+
+[node name="BarrierLarge8" type="MeshInstance3D" parent="CSGBox3D" unique_id=999935643]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.8858852, -0.494794, 0.64707756)
+
+[node name="BarrierLarge9" type="MeshInstance3D" parent="CSGBox3D" unique_id=1848732457]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.9938335, -0.494794, -2.023672)
+
+[node name="BarrierLarge10" type="MeshInstance3D" parent="CSGBox3D" unique_id=1370726021]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.07157612, -0.494794, -2.0687866)
+
+[node name="BarrierLarge12" type="MeshInstance3D" parent="CSGBox3D" unique_id=971023695]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.630526, -0.494794, 2.9919586)
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1511511560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1212616, 0.54470944, -4.744882)
+script = ExtResource("1_enfvv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=934959195]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Sprite3D" type="Sprite3D" parent="Player" unique_id=1836648687]
+
+[node name="zombie" parent="Player/Sprite3D" unique_id=891538413 instance=ExtResource("2_1njsv")]
+
+[node name="Skeleton3D" parent="Player/Sprite3D/zombie/Root" parent_id_path=PackedInt32Array(891538413, 476398423) index="0" unique_id=400798618]
+bones/0/rotation = Quaternion(-0.6058329, 1.5154554e-07, 0.79559195, 1.42970915e-08)
+bones/1/rotation = Quaternion(-0.50751233, 0.50822777, -0.49190676, -0.49210116)
+bones/2/rotation = Quaternion(0.015735742, -0.00207875, 0.9946248, -0.10232129)
+bones/3/rotation = Quaternion(0.94612885, -0.02187079, 0.07550246, -0.3141039)
+bones/7/rotation = Quaternion(-0.70710707, 8.429368e-08, 0.7071066, 9.602499e-08)
+bones/9/position = Vector3(-0.20752048, 0.19320484, 0.0304607)
+bones/9/rotation = Quaternion(-0.7461759, 1.0883371e-07, 0.6657489, 6.863127e-08)
+bones/10/rotation = Quaternion(-0.50768536, 0.50790185, -0.49172822, -0.4924375)
+bones/12/rotation = Quaternion(0.94811195, 0.011444981, -0.044093173, -0.31465632)
+bones/16/rotation = Quaternion(-0.70710707, 2.0942699e-07, 0.7071066, 8.820417e-08)
+bones/18/position = Vector3(-4.9916023e-05, 1.455459, 0.10399981)
+bones/18/rotation = Quaternion(9.298331e-05, -1.074826e-07, 0.99999905, -0.0014432229)
+bones/19/rotation = Quaternion(5.2979613e-05, -0.027772423, 0.9996132, 0.0014452412)
+bones/20/rotation = Quaternion(0.010562514, 4.350584e-08, -1.1907456e-08, 0.99994427)
+bones/21/rotation = Quaternion(0.062348284, -0.04485285, -0.0028048046, 0.9970422)
+bones/22/rotation = Quaternion(0.094094, -1.15806266e-07, 1.1904564e-08, 0.9955633)
+bones/23/rotation = Quaternion(0.090605594, -0.00033168044, -0.0012214244, 0.99588615)
+bones/24/rotation = Quaternion(-0.16164325, 0.044219833, -0.00801593, 0.98582554)
+bones/26/rotation = Quaternion(0.59765595, 0.3955071, 0.5656475, -0.40795153)
+bones/27/rotation = Quaternion(-0.33906838, 0.655453, -0.24281767, 0.62964565)
+bones/28/rotation = Quaternion(0.35397342, -0.049644813, -0.09690272, 0.9288962)
+bones/29/rotation = Quaternion(-0.00010091741, 0.722394, -0.03963257, 0.69034505)
+bones/31/rotation = Quaternion(0.7716674, 0.046640955, 0.0019653144, 0.63431084)
+bones/32/rotation = Quaternion(0.410935, -0.027859204, 0.012505789, 0.9111531)
+bones/34/rotation = Quaternion(-0.21306051, 0.69503933, 0.35843098, 0.5857071)
+bones/35/rotation = Quaternion(0.6606476, -0.07545541, 0.11935169, 0.73729676)
+bones/37/rotation = Quaternion(0.6781869, -0.48571038, 0.4635282, 0.2988139)
+bones/38/rotation = Quaternion(0.065380655, 0.90817446, 0.38738817, -0.14448223)
+bones/39/rotation = Quaternion(-0.09585238, -0.031645562, 0.35100195, 0.93091816)
+bones/40/rotation = Quaternion(-0.009312203, 0.15366, -0.033736352, 0.98750377)
+bones/42/rotation = Quaternion(-0.74740016, 0.04220648, 0.0076554557, 0.662988)
+bones/43/rotation = Quaternion(-0.4109374, -0.027858129, -0.012504528, 0.9111521)
+bones/45/rotation = Quaternion(-0.23101954, 0.8024928, -0.3471272, -0.42677617)
+bones/46/rotation = Quaternion(-0.59514165, 0.045921654, 0.31065416, 0.739724)
+bones/48/rotation = Quaternion(0.9942531, 0.07960593, -0.002247829, 0.07154435)
+bones/49/rotation = Quaternion(0.3956079, 0.029748274, 0.14769459, 0.90597785)
+bones/50/rotation = Quaternion(-0.68177485, -0.15512444, -0.1595699, 0.69689095)
+bones/53/rotation = Quaternion(0.9675598, -0.06149753, -0.15167229, 0.19246227)
+bones/54/rotation = Quaternion(0.43448848, 0.0102624465, -0.1850341, 0.88140625)
+bones/55/rotation = Quaternion(-0.6363292, 0.21653596, 0.17365137, 0.7197518)
+bones/56/rotation = Quaternion(0.028260458, 0.9539411, -0.29757398, -0.025448045)
+
+[node name="characterMedium" parent="Player/Sprite3D/zombie/Root/Skeleton3D" index="0" unique_id=118156212]
+transform = Transform3D(-0.9981785, 0, -0.060330298, 0, 1, 0, 0.060330298, 0, -0.9981785, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Sprite3D/zombie" unique_id=1927999798]
+libraries/idle = SubResource("AnimationLibrary_vgqql")
+libraries/run = SubResource("AnimationLibrary_otvn0")
+
+[node name="AnimationTree" type="AnimationTree" parent="Player/Sprite3D/zombie" unique_id=294072169]
+tree_root = SubResource("AnimationNodeBlendTree_yf5fn")
+anim_player = NodePath("../AnimationPlayer")
+parameters/run/blend_amount = 0.0
+
+[node name="neck" type="Node3D" parent="Player" unique_id=685175205]
+
+[node name="eyes" type="Camera3D" parent="Player/neck" unique_id=561697387]
+transform = Transform3D(0.93016225, -0.097124055, 0.35406938, 0.052255996, 0.9895796, 0.13416982, -0.36341098, -0.106297456, 0.92554486, 0.38329792, 3.4565265, -0.9034591)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1304159274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0371001, 0, -1.4966984)
+
+[node name="BarrierLarge" type="MeshInstance3D" parent="StaticBody3D" unique_id=979552996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2314694, -0.47139883, -0.27494764)
+
+[node name="BarrierLarge2" type="MeshInstance3D" parent="StaticBody3D" unique_id=1000311478]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.570874, -0.47139883, -5.7378974)
+
+[node name="BarrierLarge3" type="MeshInstance3D" parent="StaticBody3D" unique_id=1949602467]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -8.084505, -0.494794, -0.18574095)
+
+[node name="BarrierLarge5" type="MeshInstance3D" parent="StaticBody3D" unique_id=1554803383]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.4606035, -0.494794, -8.850512)
+
+[node name="BarrierLarge6" type="MeshInstance3D" parent="StaticBody3D" unique_id=1180972722]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -14.134077, -0.494794, -0.26346016)
+
+[node name="BarrierLarge8" type="MeshInstance3D" parent="StaticBody3D" unique_id=383260630]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.938587, -0.494794, -3.0212593)
+
+[node name="BarrierLarge11" type="MeshInstance3D" parent="StaticBody3D" unique_id=535865549]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3462346, -0.494794, -10.1503315)
+
+[node name="BarrierLarge12" type="MeshInstance3D" parent="StaticBody3D" unique_id=2004105468]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.109648, -0.494794, -3.0864387)
+
+[node name="BarrierLarge13" type="MeshInstance3D" parent="StaticBody3D" unique_id=372535661]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.109648, -0.494794, -19.106314)
+
+[node name="BarrierLarge14" type="MeshInstance3D" parent="StaticBody3D" unique_id=986548652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.242181, -0.494794, -17.422468)
+
+[node name="BarrierLarge15" type="MeshInstance3D" parent="StaticBody3D" unique_id=1221488968]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.125449, -0.494794, -20.473768)
+
+[node name="BarrierLarge16" type="MeshInstance3D" parent="StaticBody3D" unique_id=1333169422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.164492, -0.494794, -17.417292)
+
+[node name="BarrierLarge17" type="MeshInstance3D" parent="StaticBody3D" unique_id=279692412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.018117, -0.494794, -20.133865)
+
+[node name="BarrierLarge19" type="MeshInstance3D" parent="StaticBody3D" unique_id=113482290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.808277, -0.494794, -22.515661)
+
+[node name="BarrierLarge20" type="MeshInstance3D" parent="StaticBody3D" unique_id=170953574]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.035059, -0.494794, -13.218634)
+
+[node name="BarrierLarge21" type="MeshInstance3D" parent="StaticBody3D" unique_id=1982558904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.0735035, -0.494794, -22.55315)
+
+[node name="BarrierLarge22" type="MeshInstance3D" parent="StaticBody3D" unique_id=1300946830]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.4324417, -0.494794, -9.313615)
+
+[node name="BarrierLarge23" type="MeshInstance3D" parent="StaticBody3D" unique_id=1063353317]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.4324417, -0.494794, -15.349186)
+
+[node name="BarrierLarge24" type="MeshInstance3D" parent="StaticBody3D" unique_id=877691730]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.3949585, -0.494794, -20.395771)
+
+[node name="BarrierLarge18" type="MeshInstance3D" parent="StaticBody3D" unique_id=975531636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9880955, -0.494794, -22.415937)
+
+[node name="BarrierLarge4" type="MeshInstance3D" parent="StaticBody3D" unique_id=1839773488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6124446, -0.47139883, -0.27494764)
+
+[node name="BarrierLarge7" type="MeshInstance3D" parent="StaticBody3D" unique_id=1000745522]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.483138, -0.47139883, -3.174778)
+
+[node name="BarrierLarge10" type="MeshInstance3D" parent="StaticBody3D" unique_id=730551787]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11.144254, -0.494794, -13.038939)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=968472327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.082157, 1001.6516, -10.604431)
+shape = SubResource("BoxShape3D_3gngh")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=680885887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5219803, 1001.6516, -10.604431)
+shape = SubResource("BoxShape3D_3gngh")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1721823149]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.677334, 1001.6516, -0.113702774)
+shape = SubResource("BoxShape3D_3gngh")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D" unique_id=869425739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.26947, 0, -12.949207)
+shape = SubResource("BoxShape3D_fcnqv")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D" unique_id=627495327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7655833, 0, -17.193089)
+shape = SubResource("BoxShape3D_fcnqv")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="StaticBody3D" unique_id=1403327775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65184, 0, -8.837764)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="StaticBody3D" unique_id=627846696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3749337, 0, -22.456665)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="StaticBody3D" unique_id=1670301298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7463262, 0, -22.529104)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="StaticBody3D" unique_id=515101753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.241077, 0, -20.210995)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="StaticBody3D" unique_id=141155084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.987535, 0, -22.673986)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="StaticBody3D" unique_id=1395614705]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.408007, 0, -10.069261)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="StaticBody3D" unique_id=1765389192]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.141863, 0, -7.751152)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="StaticBody3D" unique_id=1114029478]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.9812355, 0, -3.5495744)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D14" type="CollisionShape3D" parent="StaticBody3D" unique_id=1962762690]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3969805, 0, -10.069261)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D15" type="CollisionShape3D" parent="StaticBody3D" unique_id=537551996]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.4282167, 0, -6.0125685)
+shape = SubResource("BoxShape3D_7numd")
+
+[node name="CollisionShape3D16" type="CollisionShape3D" parent="StaticBody3D" unique_id=90794893]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.1276913, 0, -20.319656)
+shape = SubResource("BoxShape3D_7numd")
+
+[editable path="Player/Sprite3D/zombie"]
