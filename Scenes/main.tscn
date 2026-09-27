@@ -1,11 +1,23 @@
 [gd_scene format=3 uid="uid://vmj5bydlcn63"]
 
-[ext_resource type="Script" uid="uid://cnvm68hmj3d18" path="res://Scenes/hipocampus_trigger.gd" id="1_jjgbg"]
-[ext_resource type="Script" uid="uid://d3msru1jwlb35" path="res://Scenes/player.gd" id="2_bo1nx"]
-[ext_resource type="Script" uid="uid://b7sri7gnppawb" path="res://Scenes/hippocampus_trigger_2.gd" id="3_jjvhh"]
-[ext_resource type="AudioStream" uid="uid://cem6ht06lpyfh" path="res://audio/narrator/INTRO.mp3" id="3_kry3j"]
-[ext_resource type="Script" uid="uid://dsewwplrgdyjn" path="res://Scenes/hippocampus_trigger_3.gd" id="4_kry3j"]
+[ext_resource type="Texture2D" uid="uid://do6n3stb7mtok" path="res://assets/Textures/PathRocks_Diffuse.png" id="2_21xkr"]
+[ext_resource type="Script" uid="uid://cub3jdjthkxdb" path="res://Scenes/intro_trigger.gd" id="3_jjvhh"]
+[ext_resource type="AudioStream" uid="uid://ddxelc5w157dg" path="res://audio/intro.mp3" id="4_hptm8"]
+[ext_resource type="ArrayMesh" uid="uid://b6jvsfh7dfu0n" path="res://assets/nature/CommonTree_2.obj" id="5_344ge"]
 [ext_resource type="PackedScene" uid="uid://0d5jhard1jfb" path="res://hippocampus.tscn" id="6_21xkr"]
+[ext_resource type="Texture2D" uid="uid://csslvs3hsf3c2" path="res://assets/Textures/Bark_NormalTree.png" id="6_344ge"]
+[ext_resource type="Texture2D" uid="uid://duffjodpsaf4x" path="res://assets/Textures/Leaves_NormalTree_C.png" id="7_ynf5e"]
+[ext_resource type="ArrayMesh" uid="uid://d147k2667pscu" path="res://assets/nature/CommonTree_3.obj" id="8_ynf5e"]
+[ext_resource type="ArrayMesh" uid="uid://dtfposbm5np3t" path="res://assets/nature/RockPath_Round_Small_1.obj" id="9_ynf5e"]
+[ext_resource type="Script" uid="uid://e43obg5ibbgv" path="res://character_body_3d.gd" id="10_hptm8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hptm8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6iyac"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fdnlq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo1nx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -19,26 +31,56 @@ background_mode = 2
 sky = SubResource("Sky_8gbba")
 fog_light_energy = 0.5
 fog_sun_scatter = 0.52
+volumetric_fog_density = 0.025
+volumetric_fog_detail_spread = 6.0
 volumetric_fog_ambient_inject = 0.72
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_57qmd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bp64"]
+albedo_texture = ExtResource("2_21xkr")
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_57qmd"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_yf5fn"]
 
-[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_jjvhh"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+size = Vector3(1, 1, 35.814636)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_57qmd"]
+size = Vector3(11.846252, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_3gngh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hptm8"]
+albedo_texture = ExtResource("6_344ge")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
-size = Vector3(1, 1.048706, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1ilt"]
+albedo_texture = ExtResource("7_ynf5e")
 
-[sub_resource type="BoxMesh" id="BoxMesh_jjvhh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iyac"]
+albedo_texture = ExtResource("6_344ge")
 
-[sub_resource type="BoxMesh" id="BoxMesh_yf5fn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdnlq"]
+albedo_texture = ExtResource("7_ynf5e")
 
 [node name="Main" type="Node3D" unique_id=601091813]
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1698603320 groups=["players"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32662058, 0, 2.7394924)
+script = ExtResource("10_hptm8")
+
+[node name="PickupArea" type="Area3D" parent="Player" unique_id=172891571 groups=["pickup"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/PickupArea" unique_id=770479504]
+shape = SubResource("SphereShape3D_hptm8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1507123629]
+mesh = SubResource("CapsuleMesh_6iyac")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1864519715]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.059246063, 2, -0.043813705)
+current = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1996570449]
+shape = SubResource("CapsuleShape3D_fdnlq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player" unique_id=1406416050]
+mesh = SubResource("CapsuleMesh_g4v7s")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1940462667]
 environment = SubResource("Environment_jjvhh")
@@ -47,80 +89,178 @@ environment = SubResource("Environment_jjvhh")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0.8633919, 3.1775923, -4.898594)
 shadow_enabled = true
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1094363594]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8402157, 0)
-disable_mode = 2
-script = ExtResource("2_bo1nx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=213200808]
-shape = SubResource("CapsuleShape3D_57qmd")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=61834871]
-transform = Transform3D(0.9996099, 0.0010035903, -0.027911685, -0.0032876749, 0.9966345, -0.081907704, 0.027735546, 0.08196752, 0.996249, 0, -1.0704074, 3.633676)
-mesh = SubResource("CapsuleMesh_57qmd")
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1897959330]
-transform = Transform3D(0.9868563, 0.07430072, -0.1435069, 0.033709977, 0.7738479, 0.6324739, 0.15804577, -0.6289984, 0.7611719, 0.3246765, 0.7481475, 6.447937)
-keep_aspect = 0
-doppler_tracking = 1
-current = true
-fov = 120.0
-near = 0.5
-
 [node name="Platform" type="CSGBox3D" parent="." unique_id=1049611834]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2491345, -2.245637, -17.78772)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4346454, -2.245637, -9.013058)
 use_collision = true
-size = Vector3(7.7240705, 1, 52.47104)
+size = Vector3(12.348935, 1, 34.921715)
+material = SubResource("StandardMaterial3D_6bp64")
 
-[node name="Hippocampus" type="MeshInstance3D" parent="." unique_id=414353636]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3186563, -9.720162)
-mesh = SubResource("PlaceholderMesh_jjvhh")
-
-[node name="HippocampusTrigger1" type="Area3D" parent="Hippocampus" unique_id=1543717779]
-transform = Transform3D(0.99999124, -0.0013677641, -0.0039515933, 0.0013820867, 0.9999925, 0.0036263322, 0.003946607, -0.0036317585, 0.99998564, 0, 0, 2.209977)
-script = ExtResource("1_jjgbg")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hippocampus/HippocampusTrigger1" unique_id=32655258]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-shape = SubResource("BoxShape3D_kry3j")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hippocampus/HippocampusTrigger1" unique_id=2103488051]
-mesh = SubResource("BoxMesh_3gngh")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Hippocampus/HippocampusTrigger1" unique_id=1032761089]
-transform = Transform3D(1, 8.6747605e-09, -3.259629e-09, 2.6648195e-10, 0.99999994, -3.4924597e-09, 0, 0, 1, 0, 0, 0)
-stream = ExtResource("3_kry3j")
-volume_db = 24.478
-
-[node name="HippocampusTrigger2" type="Area3D" parent="Hippocampus" unique_id=1895836541]
-transform = Transform3D(0.99999124, -0.0013677641, -0.0039515933, 0.0013820867, 0.9999925, 0.0036263322, 0.003946607, -0.0036317585, 0.99998564, 0, 0, -5)
+[node name="IntroTrigger" type="Area3D" parent="." unique_id=759961264]
 script = ExtResource("3_jjvhh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hippocampus/HippocampusTrigger2" unique_id=350023363]
-transform = Transform3D(1.5, -9.2359187e-10, 0, 9.2359187e-10, 1.5, 0, 0, 0, 1.5, -0.019608319, 0.066750824, -4.9683332)
-shape = SubResource("BoxShape3D_g4v7s")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IntroTrigger" unique_id=2067058609]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_yf5fn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hippocampus/HippocampusTrigger2" unique_id=724492408]
-transform = Transform3D(1, -5.7298166e-11, 0, 1.5006663e-10, 1, -2.3283064e-10, 0, 0, 1, -0.020283237, 0.018665135, -5.1393423)
-mesh = SubResource("BoxMesh_jjvhh")
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="IntroTrigger" unique_id=668119904]
+stream = ExtResource("4_hptm8")
 
-[node name="HippocampusTrigger3" type="Area3D" parent="Hippocampus" unique_id=1171878565]
-transform = Transform3D(0.99999124, -0.0013677641, -0.0039515933, 0.0013820867, 0.9999925, 0.0036263322, 0.003946607, -0.0036317585, 0.99998564, 0, 0, -5.782901)
-script = ExtResource("4_kry3j")
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1211738820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.000183, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hippocampus/HippocampusTrigger3" unique_id=1396868249]
-transform = Transform3D(1.5, -5.743459e-10, 0, 5.743459e-10, 1.5, 0, 0, 0, 1.5, -0.29826492, 0.06670809, -18.281654)
-shape = SubResource("BoxShape3D_g4v7s")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=735584552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.422577)
+shape = SubResource("BoxShape3D_yf5fn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hippocampus/HippocampusTrigger3" unique_id=1647804895]
-transform = Transform3D(1, -5.7298166e-11, 0, 2.6648195e-10, 1, -4.656613e-10, 0, 0, 1, -0.071909115, 0.06617254, -18.220242)
-mesh = SubResource("BoxMesh_yf5fn")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=50416447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.869141, 0, -9.422577)
+shape = SubResource("BoxShape3D_yf5fn")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=107919997]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1401401718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5216503, 0, 7.8854446)
+shape = SubResource("BoxShape3D_57qmd")
 
-[node name="Hippocampus2" parent="." unique_id=1214951303 instance=ExtResource("6_21xkr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -51.946526)
+[node name="Background" type="Area3D" parent="." unique_id=1812723442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7087631, 0, 0)
 
-[connection signal="body_entered" from="Hippocampus/HippocampusTrigger1" to="Hippocampus/HippocampusTrigger1" method="_on_body_entered"]
-[connection signal="body_entered" from="Hippocampus/HippocampusTrigger2" to="Hippocampus/HippocampusTrigger2" method="_on_body_entered"]
-[connection signal="body_entered" from="Hippocampus/HippocampusTrigger3" to="Hippocampus/HippocampusTrigger3" method="_on_body_entered"]
+[node name="CommonTree2" type="MeshInstance3D" parent="Background" unique_id=1072519643]
+transform = Transform3D(0.4521904, 0, 0.8919214, 0, 1, 0, -0.8919214, 0, 0.4521904, -4, -2, -1.8084102)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree3" type="MeshInstance3D" parent="Background" unique_id=2038875558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -3.7645345, 1.615)
+mesh = ExtResource("8_ynf5e")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iyac")
+surface_material_override/1 = SubResource("StandardMaterial3D_fdnlq")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="Background" unique_id=748304510]
+transform = Transform3D(0.5832253, 0, -0.8123104, 0, 1, 0, 0.8123104, 0, 0.5832253, -4.538414, -3.0924907, -5.077669)
+mesh = ExtResource("8_ynf5e")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iyac")
+surface_material_override/1 = SubResource("StandardMaterial3D_fdnlq")
+
+[node name="CommonTree4" type="MeshInstance3D" parent="Background" unique_id=136460297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, 5)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree6" type="MeshInstance3D" parent="Background" unique_id=1172833734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, -8.719321)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree7" type="MeshInstance3D" parent="Background" unique_id=911235671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, -8.719321)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree8" type="MeshInstance3D" parent="Background" unique_id=1679604233]
+transform = Transform3D(0.8707369, 0, -0.49174917, 0, 1, 0, 0.49174917, 0, 0.8707369, -4.657913, -2, -12.786404)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree12" type="MeshInstance3D" parent="Background" unique_id=1511243025]
+transform = Transform3D(0.9516911, 0, -0.30705717, 0, 1, 0, 0.30705717, 0, 0.9516911, -4.657913, -2, -10.246669)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree9" type="MeshInstance3D" parent="Background" unique_id=515273281]
+transform = Transform3D(0.3858911, 0, -0.92254424, 0, 1, 0, 0.92254424, 0, 0.3858911, -4.657913, -2, -16.567974)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree10" type="MeshInstance3D" parent="Background" unique_id=884202956]
+transform = Transform3D(0.80355024, 0, -0.59523696, 0, 1, 0, 0.59523696, 0, 0.80355024, -4.657913, -2, -21.216156)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree11" type="MeshInstance3D" parent="Background" unique_id=771267522]
+transform = Transform3D(0.62586987, 0, -0.77992755, 0, 1, 0, 0.77992755, 0, 0.62586987, -4.264, -2, -24.80077)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="Background2" type="Area3D" parent="." unique_id=1602471245]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.5906334, 0, -19.845371)
+
+[node name="CommonTree2" type="MeshInstance3D" parent="Background2" unique_id=1951038592]
+transform = Transform3D(0.4521904, 0, 0.8919214, 0, 1, 0, -0.8919214, 0, 0.4521904, -4, -2, -1.8084102)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree3" type="MeshInstance3D" parent="Background2" unique_id=22000525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -3.791029, 1.6153431)
+mesh = ExtResource("8_ynf5e")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iyac")
+surface_material_override/1 = SubResource("StandardMaterial3D_fdnlq")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="Background2" unique_id=462613951]
+transform = Transform3D(0.5832253, 0, -0.8123104, 0, 1, 0, 0.8123104, 0, 0.5832253, -4.538414, -3.5701199, -5.077669)
+mesh = ExtResource("8_ynf5e")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iyac")
+surface_material_override/1 = SubResource("StandardMaterial3D_fdnlq")
+
+[node name="CommonTree4" type="MeshInstance3D" parent="Background2" unique_id=1927790169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, 5)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree6" type="MeshInstance3D" parent="Background2" unique_id=1032400504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, -8.719321)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree7" type="MeshInstance3D" parent="Background2" unique_id=1813879440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, -8.719321)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree8" type="MeshInstance3D" parent="Background2" unique_id=1922121806]
+transform = Transform3D(0.8707369, 0, -0.49174917, 0, 1, 0, 0.49174917, 0, 0.8707369, -4.657913, -2, -12.786404)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree12" type="MeshInstance3D" parent="Background2" unique_id=678508522]
+transform = Transform3D(0.9516911, 0, -0.30705717, 0, 1, 0, 0.30705717, 0, 0.9516911, -4.657913, -2, -10.246669)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree9" type="MeshInstance3D" parent="Background2" unique_id=2034476986]
+transform = Transform3D(0.3858911, 0, -0.92254424, 0, 1, 0, 0.92254424, 0, 0.3858911, -4.657913, -2, -16.567974)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree10" type="MeshInstance3D" parent="Background2" unique_id=1824005054]
+transform = Transform3D(0.80355024, 0, -0.59523696, 0, 1, 0, 0.59523696, 0, 0.80355024, -4.657913, -2, -21.216156)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="CommonTree11" type="MeshInstance3D" parent="Background2" unique_id=1665951451]
+transform = Transform3D(0.62586987, 0, -0.77992755, 0, 1, 0, 0.77992755, 0, 0.62586987, -4.264, -2, -24.80077)
+mesh = ExtResource("5_344ge")
+surface_material_override/0 = SubResource("StandardMaterial3D_hptm8")
+surface_material_override/1 = SubResource("StandardMaterial3D_d1ilt")
+
+[node name="RockPathRoundSmall1" type="MeshInstance3D" parent="." unique_id=1904213073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 4)
+mesh = ExtResource("9_ynf5e")
+
+[node name="Hippocampus" parent="." unique_id=1214951303 instance=ExtResource("6_21xkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.423935, -0.5508642, -32.862206)

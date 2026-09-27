@@ -7,6 +7,8 @@ var triggered = false
 
 
 func _on_body_entered(body: Node3D) -> void:
+	print("Something entered trigger: ", body.name)
+
 	if body.name == "Player" and not triggered:
 		triggered = true
 		trigger_event()

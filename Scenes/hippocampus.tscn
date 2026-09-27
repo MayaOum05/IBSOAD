@@ -24,7 +24,9 @@
 [ext_resource type="ArrayMesh" uid="uid://b0dxg4irbik2w" path="res://assets/nature/Pebble_Round_2.obj" id="22_kpwb8"]
 [ext_resource type="ArrayMesh" uid="uid://c8mnqe00lvxqa" path="res://assets/nature/Pebble_Round_1.obj" id="23_pj1ly"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_yf5fn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 
@@ -61,27 +63,49 @@ script = ExtResource("1_qhwmi")
 
 [node name="MemoryObjects" type="Node3D" parent="." unique_id=829719323]
 
-[node name="Area3D" type="Area3D" parent="MemoryObjects" unique_id=1852698446]
+[node name="Star" type="Area3D" parent="MemoryObjects" unique_id=1852698446 groups=["pickup"]]
 script = ExtResource("2_xirom")
 
-[node name="Star" type="MeshInstance3D" parent="MemoryObjects/Area3D" unique_id=1627733463]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Star" unique_id=1484033764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.455431, 0, -7.1969485)
+shape = SubResource("SphereShape3D_yf5fn")
+
+[node name="Star" type="MeshInstance3D" parent="MemoryObjects/Star" unique_id=1627733463]
 transform = Transform3D(0.7888254, 0, 0.61461735, 0, 1, 0, -0.61461735, 0, 0.7888254, -8.448881, -0.7093598, -7.0278864)
 mesh = ExtResource("3_ydhio")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Area3D/Star" unique_id=1305530439]
-shape = SubResource("SphereShape3D_g4v7s")
+[node name="Ball" type="Area3D" parent="MemoryObjects" unique_id=722011915 groups=["pickup"]]
+script = ExtResource("2_xirom")
 
-[node name="HoopTeamYellow" type="MeshInstance3D" parent="MemoryObjects" unique_id=1727265168]
+[node name="Ball" type="MeshInstance3D" parent="MemoryObjects/Ball" unique_id=1263556248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.16855, -0.23754883, -2.3136237)
+mesh = ExtResource("6_de076")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Ball" unique_id=789493207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.579121, 0, -1.8090696)
+shape = SubResource("SphereShape3D_yf5fn")
+
+[node name="Hoop" type="Area3D" parent="MemoryObjects" unique_id=480751384 groups=["pickup"]]
+script = ExtResource("2_xirom")
+
+[node name="Hoop" type="MeshInstance3D" parent="MemoryObjects/Hoop" unique_id=1727265168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0389452, -1.2375479, -10.022482)
 mesh = ExtResource("4_qow05")
 
-[node name="FlagTeamBlue" type="MeshInstance3D" parent="MemoryObjects" unique_id=2081984448]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Hoop" unique_id=613907804]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9831886, 0, -9.871225)
+shape = SubResource("SphereShape3D_yf5fn")
+
+[node name="Flag" type="Area3D" parent="MemoryObjects" unique_id=1845467048 groups=["pickup"]]
+script = ExtResource("2_xirom")
+
+[node name="Flag" type="MeshInstance3D" parent="MemoryObjects/Flag" unique_id=2081984448]
 transform = Transform3D(0.81420815, 0, -0.5805731, 0, 1, 0, 0.5805731, 0, 0.81420815, 4.567231, -1.2375488, -4.389085)
 mesh = ExtResource("5_mesw2")
 
-[node name="Ball" type="MeshInstance3D" parent="MemoryObjects" unique_id=1263556248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.16855, -0.23754883, -2.3136237)
-mesh = ExtResource("6_de076")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Flag" unique_id=500790850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.365362, 0, -4.2473803)
+shape = SubResource("SphereShape3D_yf5fn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=272624680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7921829, 0, -16.12965)
@@ -93,6 +117,11 @@ light_energy = 2.0
 [node name="Player" type="CharacterBody3D" parent="." unique_id=943811252 groups=["players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6058574, 0, 2.7394924)
 script = ExtResource("7_crxdj")
+
+[node name="PickupArea" type="Area3D" parent="Player" unique_id=1419050861 groups=["pickup"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/PickupArea" unique_id=1762633910]
+shape = SubResource("BoxShape3D_yf5fn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2045857479]
 mesh = SubResource("CapsuleMesh_g4v7s")

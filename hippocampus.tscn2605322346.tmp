@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://0d5jhard1jfb"]
 
 [ext_resource type="Script" uid="uid://c6qtyvt3jo1ao" path="res://hippocampus.gd" id="1_8i2qb"]
-[ext_resource type="Script" uid="uid://c38q6l7uty13x" path="res://area_3d.gd" id="2_dxcts"]
+[ext_resource type="Script" uid="uid://e43obg5ibbgv" path="res://character_body_3d.gd" id="1_q5mpa"]
 [ext_resource type="Script" uid="uid://b5eru5vbgcts4" path="res://hippo_trigger_1.gd" id="2_o777h"]
 [ext_resource type="ArrayMesh" uid="uid://c70hrs6l6qx05" path="res://assets/mini-game obj/star.obj" id="2_tf3je"]
 [ext_resource type="ArrayMesh" uid="uid://dswd0q1jbabkj" path="res://assets/mini-game obj/hoop_teamYellow.obj" id="3_dxcts"]
 [ext_resource type="Texture2D" uid="uid://do6n3stb7mtok" path="res://assets/Textures/PathRocks_Diffuse.png" id="3_tl1y6"]
+[ext_resource type="AudioStream" uid="uid://bepqkmxfv5o0a" path="res://audio/instructions/room1_instructions.mp3" id="4_l7gy3"]
 [ext_resource type="ArrayMesh" uid="uid://dtk4g7yoeoovs" path="res://assets/mini-game obj/flag_teamBlue.obj" id="4_lkg2d"]
 [ext_resource type="ArrayMesh" uid="uid://udkshlv2xufb" path="res://assets/mini-game obj/ball.obj" id="5_vav3b"]
+[ext_resource type="Script" uid="uid://btkwsvbe21tpw" path="res://memory_timer.gd" id="6_ab41h"]
 [ext_resource type="ArrayMesh" uid="uid://7krgplanqqfx" path="res://assets/nature/CommonTree_1.obj" id="6_i2pmy"]
 [ext_resource type="Texture2D" uid="uid://duffjodpsaf4x" path="res://assets/Textures/Leaves_NormalTree_C.png" id="7_8i2qb"]
 [ext_resource type="Texture2D" uid="uid://csslvs3hsf3c2" path="res://assets/Textures/Bark_NormalTree.png" id="8_ab41h"]
@@ -21,7 +23,10 @@
 [ext_resource type="ArrayMesh" uid="uid://bk16oux4h6nto" path="res://assets/nature/Pebble_Square_4.obj" id="17_dxcts"]
 [ext_resource type="ArrayMesh" uid="uid://b0dxg4irbik2w" path="res://assets/nature/Pebble_Round_2.obj" id="17_wkkly"]
 [ext_resource type="ArrayMesh" uid="uid://c8mnqe00lvxqa" path="res://assets/nature/Pebble_Round_1.obj" id="18_wiyla"]
-[ext_resource type="AudioStream" uid="uid://bpfu313dw1sbo" path="res://audio/narrator/hippoins.mp3" id="23_tf3je"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wiyla"]
 albedo_texture = ExtResource("3_tl1y6")
@@ -49,38 +54,66 @@ albedo_texture = ExtResource("11_xy00a")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf3je"]
 albedo_texture = ExtResource("13_tl1y6")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wiyla"]
-
 [node name="Hippocampus" type="Node3D" unique_id=1214951303]
 script = ExtResource("1_8i2qb")
 
+[node name="MemoryObjects" type="Node3D" parent="." unique_id=829719323]
+
+[node name="Star" type="MeshInstance3D" parent="MemoryObjects" unique_id=1627733463]
+transform = Transform3D(0.7888254, 0, 0.61461735, 0, 1, 0, -0.61461735, 0, 0.7888254, -8.448881, -0.7093598, -7.0278864)
+mesh = ExtResource("2_tf3je")
+
+[node name="HoopTeamYellow" type="MeshInstance3D" parent="MemoryObjects" unique_id=1727265168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0389452, -1.2375479, -10.022482)
+mesh = ExtResource("3_dxcts")
+
+[node name="FlagTeamBlue" type="MeshInstance3D" parent="MemoryObjects" unique_id=2081984448]
+transform = Transform3D(0.81420815, 0, -0.5805731, 0, 1, 0, 0.5805731, 0, 0.81420815, 4.567231, -1.2375488, -4.389085)
+mesh = ExtResource("4_lkg2d")
+
+[node name="Ball" type="MeshInstance3D" parent="MemoryObjects" unique_id=1263556248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.16855, -0.23754883, -2.3136237)
+mesh = ExtResource("5_vav3b")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=272624680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7921829, 0, -16.12965)
-light_color = Color(1, 1, 0.67058825, 1)
-light_energy = 2.0
+light_energy = 1.43
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1747229398]
 
+[node name="Player" type="CharacterBody3D" parent="." unique_id=943811252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6058574, 0, 2.7394924)
+script = ExtResource("1_q5mpa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2045857479]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1338875518]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1457847898]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2, 2)
+fov = 100.0
+
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=94491180]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6125245, -1.5140295, -3.950119)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.525433, -1.5140295, -3.9591675)
 use_collision = true
-size = Vector3(28.906849, 0.5527344, 26.57962)
+size = Vector3(23.947464, 0.5527344, 21.577759)
 material = SubResource("StandardMaterial3D_wiyla")
 
 [node name="HippoTrigger1" type="Area3D" parent="." unique_id=1192291982]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.6308231, 0, 5.1424203)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4699707, 0, -1.4604602)
 script = ExtResource("2_o777h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HippoTrigger1" unique_id=768440023]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.4021859, 0, -2.9812713)
 shape = SubResource("BoxShape3D_g4v7s")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HippoTrigger1" unique_id=231571468]
-transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -1.4825275, 0, -2.7915668)
-stream = ExtResource("23_tf3je")
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HippoTrigger1" unique_id=1961056751]
+stream = ExtResource("4_l7gy3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=691682853]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.850854, 0.7036412, 8.633854)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17377591, 0.7036412, 8.633854)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=495634357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6481702, 1.465498, -1.9755735)
@@ -101,8 +134,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.946826, 1.465498, -0.85797
 shape = SubResource("BoxShape3D_57qmd")
 
 [node name="MemoryTimer" type="Timer" parent="." unique_id=372848733]
-wait_time = 5.0
+wait_time = 4.0
 one_shot = true
+script = ExtResource("6_ab41h")
 
 [node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=69241492]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6882424, -0.99477684, 1.3721745)
@@ -441,66 +475,6 @@ mesh = ExtResource("12_pbjmo")
 [node name="PebbleSquare1" type="MeshInstance3D" parent="." unique_id=1850917954]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9349146, -1.2353468, -12.536945)
 mesh = ExtResource("16_tf3je")
-
-[node name="StaticBody3D6" type="StaticBody3D" parent="." unique_id=1068326659]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28461838, -0.6973436, -13.747617)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6" unique_id=1762385429]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.946826, 1.465498, -0.85797405)
-shape = SubResource("BoxShape3D_57qmd")
-
-[node name="StaticBody3D7" type="StaticBody3D" parent="." unique_id=1841041912]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.294959, 0.7036412, 8.633854)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D7" unique_id=1301580160]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6481702, 1.465498, -1.9755735)
-shape = SubResource("BoxShape3D_57qmd")
-
-[node name="MemoryObjects" type="Node3D" parent="." unique_id=412498008]
-
-[node name="Star" type="Area3D" parent="MemoryObjects" unique_id=1876138424 groups=["pickup"]]
-script = ExtResource("2_dxcts")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Star" unique_id=1110224406]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.455431, 0, -7.1969485)
-shape = SubResource("SphereShape3D_wiyla")
-
-[node name="Star" type="MeshInstance3D" parent="MemoryObjects/Star" unique_id=1491348173]
-transform = Transform3D(0.7888254, 0, 0.61461735, 0, 1, 0, -0.61461735, 0, 0.7888254, -8.448881, -0.7093598, -7.0278864)
-mesh = ExtResource("2_tf3je")
-
-[node name="Ball" type="Area3D" parent="MemoryObjects" unique_id=2090375902 groups=["pickup"]]
-script = ExtResource("2_dxcts")
-
-[node name="Ball" type="MeshInstance3D" parent="MemoryObjects/Ball" unique_id=880874640]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.16855, -0.23754883, -2.3136237)
-mesh = ExtResource("5_vav3b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Ball" unique_id=1489310058]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.579121, 0, -1.8090696)
-shape = SubResource("SphereShape3D_wiyla")
-
-[node name="Hoop" type="Area3D" parent="MemoryObjects" unique_id=1548004165 groups=["pickup"]]
-script = ExtResource("2_dxcts")
-
-[node name="Hoop" type="MeshInstance3D" parent="MemoryObjects/Hoop" unique_id=1631322716]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0389452, -1.2375479, -10.022482)
-mesh = ExtResource("3_dxcts")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Hoop" unique_id=2142699695]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9831886, 0, -9.871225)
-shape = SubResource("SphereShape3D_wiyla")
-
-[node name="Flag" type="Area3D" parent="MemoryObjects" unique_id=1861997364 groups=["pickup"]]
-script = ExtResource("2_dxcts")
-
-[node name="Flag" type="MeshInstance3D" parent="MemoryObjects/Flag" unique_id=1614405748]
-transform = Transform3D(0.81420815, 0, -0.5805731, 0, 1, 0, 0.5805731, 0, 0.81420815, 4.567231, -1.2375488, -4.389085)
-mesh = ExtResource("4_lkg2d")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Flag" unique_id=1661013601]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.365362, 0, -4.2473803)
-shape = SubResource("SphereShape3D_wiyla")
 
 [connection signal="body_entered" from="HippoTrigger1" to="HippoTrigger1" method="_on_body_entered"]
 [connection signal="timeout" from="MemoryTimer" to="." method="_on_memory_timer_timeout"]
