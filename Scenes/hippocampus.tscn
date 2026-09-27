@@ -1,3 +1,503 @@
 [gd_scene format=3 uid="uid://vawldlwfjorc"]
 
-[node name="Node3D" type="Node3D" unique_id=1504276371]
+[ext_resource type="Script" uid="uid://c6qtyvt3jo1ao" path="res://hippocampus.gd" id="1_qhwmi"]
+[ext_resource type="Script" uid="uid://c38q6l7uty13x" path="res://area_3d.gd" id="2_xirom"]
+[ext_resource type="ArrayMesh" uid="uid://c70hrs6l6qx05" path="res://assets/mini-game obj/star.obj" id="3_ydhio"]
+[ext_resource type="ArrayMesh" uid="uid://dswd0q1jbabkj" path="res://assets/mini-game obj/hoop_teamYellow.obj" id="4_qow05"]
+[ext_resource type="ArrayMesh" uid="uid://dtk4g7yoeoovs" path="res://assets/mini-game obj/flag_teamBlue.obj" id="5_mesw2"]
+[ext_resource type="ArrayMesh" uid="uid://udkshlv2xufb" path="res://assets/mini-game obj/ball.obj" id="6_de076"]
+[ext_resource type="Script" uid="uid://e43obg5ibbgv" path="res://character_body_3d.gd" id="7_crxdj"]
+[ext_resource type="Texture2D" uid="uid://do6n3stb7mtok" path="res://assets/Textures/PathRocks_Diffuse.png" id="8_grgr2"]
+[ext_resource type="Script" uid="uid://b5eru5vbgcts4" path="res://hippo_trigger_1.gd" id="9_lfcwr"]
+[ext_resource type="AudioStream" uid="uid://bpfu313dw1sbo" path="res://audio/narrator/hippoins.mp3" id="10_prc0o"]
+[ext_resource type="ArrayMesh" uid="uid://7krgplanqqfx" path="res://assets/nature/CommonTree_1.obj" id="11_umlyt"]
+[ext_resource type="Texture2D" uid="uid://csslvs3hsf3c2" path="res://assets/Textures/Bark_NormalTree.png" id="12_ni8cn"]
+[ext_resource type="Texture2D" uid="uid://duffjodpsaf4x" path="res://assets/Textures/Leaves_NormalTree_C.png" id="13_i0bhs"]
+[ext_resource type="ArrayMesh" uid="uid://vounl3l6lasi" path="res://assets/nature/CommonTree_5.obj" id="14_7y1eu"]
+[ext_resource type="ArrayMesh" uid="uid://sw1e23a8rhfc" path="res://assets/nature/Grass_Wispy_Short.obj" id="15_bd143"]
+[ext_resource type="Texture2D" uid="uid://c4dhfgxr0w01h" path="res://assets/Textures/Grass.png" id="16_m7xni"]
+[ext_resource type="ArrayMesh" uid="uid://7f5dys1uo8e8" path="res://assets/nature/Pebble_Round_3.obj" id="17_3be8u"]
+[ext_resource type="Texture2D" uid="uid://5yf5jqt77kdr" path="res://assets/Textures/Rocks_Diffuse.png" id="18_mvqpf"]
+[ext_resource type="ArrayMesh" uid="uid://bk16oux4h6nto" path="res://assets/nature/Pebble_Square_4.obj" id="19_h8jpt"]
+[ext_resource type="ArrayMesh" uid="uid://cjkjh33sgivif" path="res://assets/nature/Pebble_Square_1.obj" id="20_sb26o"]
+[ext_resource type="ArrayMesh" uid="uid://cw35fmsrn2ar5" path="res://assets/nature/Pebble_Square_6.obj" id="21_j8peq"]
+[ext_resource type="ArrayMesh" uid="uid://b0dxg4irbik2w" path="res://assets/nature/Pebble_Round_2.obj" id="22_kpwb8"]
+[ext_resource type="ArrayMesh" uid="uid://c8mnqe00lvxqa" path="res://assets/nature/Pebble_Round_1.obj" id="23_pj1ly"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wiyla"]
+albedo_texture = ExtResource("8_grgr2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57qmd"]
+size = Vector3(23.51918, 5.300659, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cifa8"]
+albedo_texture = ExtResource("12_ni8cn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xy00a"]
+albedo_texture = ExtResource("13_i0bhs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8i2qb"]
+albedo_texture = ExtResource("12_ni8cn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ab41h"]
+albedo_texture = ExtResource("13_i0bhs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2pmy"]
+albedo_texture = ExtResource("16_m7xni")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf3je"]
+albedo_texture = ExtResource("18_mvqpf")
+
+[node name="Hippocampus" type="Node3D" unique_id=1214951303]
+script = ExtResource("1_qhwmi")
+
+[node name="MemoryObjects" type="Node3D" parent="." unique_id=829719323]
+
+[node name="Area3D" type="Area3D" parent="MemoryObjects" unique_id=1852698446]
+script = ExtResource("2_xirom")
+
+[node name="Star" type="MeshInstance3D" parent="MemoryObjects/Area3D" unique_id=1627733463]
+transform = Transform3D(0.7888254, 0, 0.61461735, 0, 1, 0, -0.61461735, 0, 0.7888254, -8.448881, -0.7093598, -7.0278864)
+mesh = ExtResource("3_ydhio")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Area3D/Star" unique_id=1305530439]
+shape = SubResource("SphereShape3D_g4v7s")
+
+[node name="HoopTeamYellow" type="MeshInstance3D" parent="MemoryObjects" unique_id=1727265168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0389452, -1.2375479, -10.022482)
+mesh = ExtResource("4_qow05")
+
+[node name="FlagTeamBlue" type="MeshInstance3D" parent="MemoryObjects" unique_id=2081984448]
+transform = Transform3D(0.81420815, 0, -0.5805731, 0, 1, 0, 0.5805731, 0, 0.81420815, 4.567231, -1.2375488, -4.389085)
+mesh = ExtResource("5_mesw2")
+
+[node name="Ball" type="MeshInstance3D" parent="MemoryObjects" unique_id=1263556248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.16855, -0.23754883, -2.3136237)
+mesh = ExtResource("6_de076")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=272624680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7921829, 0, -16.12965)
+light_color = Color(1, 1, 0.67058825, 1)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1747229398]
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=943811252 groups=["players"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6058574, 0, 2.7394924)
+script = ExtResource("7_crxdj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2045857479]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1338875518]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1457847898]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2, 2)
+fov = 100.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=94491180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6125245, -1.5140295, -3.950119)
+use_collision = true
+size = Vector3(28.906849, 0.5527344, 26.57962)
+material = SubResource("StandardMaterial3D_wiyla")
+
+[node name="HippoTrigger1" type="Area3D" parent="." unique_id=1192291982]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.6308231, 0, 5.1424203)
+script = ExtResource("9_lfcwr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HippoTrigger1" unique_id=768440023]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.4021859, 0, -2.9812713)
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HippoTrigger1" unique_id=231571468]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -1.4825275, 0, -2.7915668)
+stream = ExtResource("10_prc0o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=691682853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.850854, 0.7036412, 8.633854)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=495634357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6481702, 1.465498, -1.9755735)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1803288933]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -14.997222, -0.6973436, 1.0737429)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2059183568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6395264, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=872318453]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.422746, -0.6973436, -1.3984823)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=451910402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.946826, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="MemoryTimer" type="Timer" parent="." unique_id=372848733]
+wait_time = 5.0
+one_shot = true
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=69241492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6882424, -0.99477684, 1.3721745)
+
+[node name="CommonTree1" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1934991417]
+transform = Transform3D(0.99893796, 2.013999e-09, 0.046074927, -2.013999e-09, 1, -4.642305e-11, -0.046074927, -4.642305e-11, 0.99893796, -8.353458, 0, 0)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4" unique_id=839739913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.098507, 0, 2.6501153)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree20" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1287898754]
+transform = Transform3D(0.9505477, 0, 0.3105787, 0, 1, 0, -0.3105787, 0, 0.9505477, 9.825542, 0, -14.252568)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree19" type="MeshInstance3D" parent="StaticBody3D4" unique_id=374620989]
+transform = Transform3D(0.8003675, 0, -0.5995098, 0, 1, 0, 0.5995098, 0, 0.8003675, 5.764361, 0, -9.56783)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree18" type="MeshInstance3D" parent="StaticBody3D4" unique_id=423557865]
+transform = Transform3D(0.99401736, 0, -0.10922009, 0, 1, 0, 0.10922009, 0, 0.99401736, 8.989604, 0, -9.410082)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree2" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1114998971]
+transform = Transform3D(0.77042556, 1.5220414e-09, -0.6375301, -2.013999e-09, 1, -4.6423056e-11, 0.6375301, 1.3197491e-09, 0.77042556, -4.3687625, 0, 2.8805025)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree4" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1424450728]
+transform = Transform3D(0.8031332, 5.0873643e-09, 0.59579986, -6.024895e-09, 1, -4.1721027e-10, -0.59579986, -3.2545613e-09, 0.8031332, 8.872498, 5.9604645e-08, 1.6868882)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree3" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1495808971]
+transform = Transform3D(0.8297317, 3.4421972e-09, 0.5581628, -4.0237205e-09, 1, -1.8559171e-10, -0.5581628, -2.0919033e-09, 0.8297317, -10.648989, 0, -2.9757018)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree3" type="MeshInstance3D" parent="StaticBody3D4/CommonTree3" unique_id=1606225490]
+transform = Transform3D(0.8297317, 3.4421972e-09, 0.5581628, -4.0237205e-09, 1, -1.8559143e-10, -0.5581628, -2.091903e-09, 0.8297317, 8.989199, 1.1920929e-07, 10.234961)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree3" type="MeshInstance3D" parent="StaticBody3D4/CommonTree3/CommonTree3" unique_id=177992931]
+transform = Transform3D(0.17192534, 5.077663e-10, 0.98511016, -9.9024255e-09, 1, 1.2127666e-09, -0.98511016, -9.963485e-09, 0.17192534, 7.8107395, 1.1920929e-07, 3.7661743)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree3" type="MeshInstance3D" parent="StaticBody3D4/CommonTree3/CommonTree3/CommonTree3" unique_id=1635328730]
+transform = Transform3D(0.8297317, 3.4421976e-09, 0.5581628, -4.0237205e-09, 1, -1.8559021e-10, -0.5581628, -2.0919035e-09, 0.8297317, 3.7077088, 5.9604645e-08, 1.5351048)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree6" type="MeshInstance3D" parent="StaticBody3D4" unique_id=877003911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.098507, 0, -13.01986)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree7" type="MeshInstance3D" parent="StaticBody3D4" unique_id=876429017]
+transform = Transform3D(0.83618444, 1.7095343e-09, 0.54844844, -2.013999e-09, 1, -4.6423056e-11, -0.54844844, -1.065758e-09, 0.83618444, -8.353458, 0, -12.064494)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree1" type="MeshInstance3D" parent="StaticBody3D4/CommonTree7" unique_id=1576080926]
+transform = Transform3D(0.99893796, 2.0139992e-09, 0.046074927, -2.013999e-09, 1, -4.6423143e-11, -0.046074927, -4.6423088e-11, 0.99893796, 3.1802707, 0, -0.64414406)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree8" type="MeshInstance3D" parent="StaticBody3D4" unique_id=910326058]
+transform = Transform3D(0.99893796, 2.0139992e-09, 0.046074927, -2.013999e-09, 1, -4.6423143e-11, -0.046074927, -4.6423088e-11, 0.99893796, -10.422823, 0, -8.55135)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree9" type="MeshInstance3D" parent="StaticBody3D4" unique_id=189713815]
+transform = Transform3D(0.60786295, 1.2610957e-09, 0.79404205, -2.013999e-09, 1, -4.642315e-11, -0.79404205, -1.5709825e-09, 0.60786295, -8.743294, 0, -6.710519)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree10" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1616031233]
+transform = Transform3D(0.9971668, 2.0117847e-09, 0.075223714, -2.013999e-09, 1, -4.642315e-11, -0.075223714, -1.0521094e-10, 0.9971668, -4.3504014, 0, -10.26667)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree11" type="MeshInstance3D" parent="StaticBody3D4" unique_id=2069911109]
+transform = Transform3D(0.99893796, 2.0139992e-09, 0.046074927, -2.013999e-09, 1, -4.6423143e-11, -0.046074927, -4.6423088e-11, 0.99893796, 0.41902494, 0, -14.073844)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree12" type="MeshInstance3D" parent="StaticBody3D4" unique_id=2073419421]
+transform = Transform3D(0.4445904, 8.538236e-10, -0.89573413, -2.013999e-09, 1, -4.642315e-11, 0.89573413, 1.8246463e-09, 0.4445904, -2.6350846, 0, -13.153429)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree13" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1769602974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.098507, 0, 2.6501153)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree13" unique_id=584331486]
+transform = Transform3D(0.9505477, 0, 0.3105787, 0, 1, 0, -0.3105787, 0, 0.9505477, 19.92405, 0, -16.902683)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree13/CommonTree5" unique_id=1364028856]
+transform = Transform3D(0.5745925, 0, -0.8184397, 0, 1, 0, 0.8184397, 0, 0.5745925, -5.3153267, 0, 3.1917505)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree13/CommonTree5/CommonTree5" unique_id=395294206]
+transform = Transform3D(0.8610576, 0, 0.5085069, 0, 1, 0, -0.5085069, 0, 0.8610576, 2.675951, 0, -1.8073082)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree14" type="MeshInstance3D" parent="StaticBody3D4" unique_id=265811442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.098507, 0, 2.6501153)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree14" unique_id=598556221]
+transform = Transform3D(0.9505477, 0, 0.3105787, 0, 1, 0, -0.3105787, 0, 0.9505477, 19.92405, 0, -16.902683)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree14/CommonTree5" unique_id=1852777332]
+transform = Transform3D(0.5745925, 0, -0.8184397, 0, 1, 0, 0.8184397, 0, 0.5745925, -5.3153267, 0, 3.1917505)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree14/CommonTree5/CommonTree5" unique_id=462152846]
+transform = Transform3D(0.8610576, 0, 0.5085069, 0, 1, 0, -0.5085069, 0, 0.8610576, 2.675951, 0, -1.8073082)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree15" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1894903461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.098507, 0, 2.6501153)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree15" unique_id=821199462]
+transform = Transform3D(0.9505477, 0, 0.3105787, 0, 1, 0, -0.3105787, 0, 0.9505477, 19.92405, 0, -16.902683)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree15/CommonTree5" unique_id=205590684]
+transform = Transform3D(0.5745925, 0, -0.8184397, 0, 1, 0, 0.8184397, 0, 0.5745925, -5.3153267, 0, 3.1917505)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree15/CommonTree5/CommonTree5" unique_id=526481577]
+transform = Transform3D(0.8610576, 0, 0.5085069, 0, 1, 0, -0.5085069, 0, 0.8610576, 2.675951, 0, -1.8073082)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree16" type="MeshInstance3D" parent="StaticBody3D4" unique_id=587787390]
+transform = Transform3D(0.41934416, 8.0241624e-10, -0.90782744, -2.013999e-09, 1, -4.6423056e-11, 0.90782744, 1.84783e-09, 0.41934416, 5.043349, 0, -14.48176)
+mesh = ExtResource("11_umlyt")
+surface_material_override/0 = SubResource("StandardMaterial3D_cifa8")
+surface_material_override/1 = SubResource("StandardMaterial3D_xy00a")
+
+[node name="CommonTree17" type="MeshInstance3D" parent="StaticBody3D4" unique_id=362568524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.098507, 0, 2.6501153)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree17" unique_id=22863939]
+transform = Transform3D(0.9505477, 0, 0.3105787, 0, 1, 0, -0.3105787, 0, 0.9505477, 19.92405, 0, -16.902683)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree17/CommonTree5" unique_id=29574325]
+transform = Transform3D(0.5745925, 0, -0.8184397, 0, 1, 0, 0.8184397, 0, 0.5745925, -5.3153267, 0, 3.1917505)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree5" type="MeshInstance3D" parent="StaticBody3D4/CommonTree17/CommonTree5/CommonTree5" unique_id=1917010863]
+transform = Transform3D(0.8610576, 0, 0.5085069, 0, 1, 0, -0.5085069, 0, 0.8610576, 2.675951, 0, -1.8073082)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree21" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1896938953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4048123, 0, -11.993119)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree22" type="MeshInstance3D" parent="StaticBody3D4" unique_id=437926163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.050335, 0, -2.0244577)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree23" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1072963817]
+transform = Transform3D(0.8310265, 0, 0.55623287, 0, 1, 0, -0.55623287, 0, 0.8310265, 5.0516057, 0, 2.6501153)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="CommonTree24" type="MeshInstance3D" parent="StaticBody3D4" unique_id=1264666031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43335772, 0, 3.8328354)
+mesh = ExtResource("14_7y1eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2qb")
+surface_material_override/1 = SubResource("StandardMaterial3D_ab41h")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="." unique_id=916039846]
+
+[node name="GrassWispyShort" type="MeshInstance3D" parent="StaticBody3D5" unique_id=767513752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.727229, -1.1517988, 1.331579)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="GrassWispyShort2" type="MeshInstance3D" parent="StaticBody3D5" unique_id=2101316044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2825937, -1.1517988, 1.331579)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="GrassWispyShort3" type="MeshInstance3D" parent="StaticBody3D5" unique_id=1836511826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.416242, -1.1517988, 1.331579)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="GrassWispyShort4" type="MeshInstance3D" parent="StaticBody3D5" unique_id=1828544848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.727229, -1.1517988, -10.791586)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="GrassWispyShort5" type="MeshInstance3D" parent="StaticBody3D5" unique_id=1503022654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3957186, -1.1517988, -7.2536983)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="GrassWispyShort6" type="MeshInstance3D" parent="StaticBody3D5" unique_id=1383466842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.161601, -1.1517988, -3.055403)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="GrassWispyShort7" type="MeshInstance3D" parent="StaticBody3D5" unique_id=91679086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.642709, -1.1517988, -10.272697)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="GrassWispyShort8" type="MeshInstance3D" parent="StaticBody3D5" unique_id=1330827151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.680274, -1.1517988, -6.2159185)
+mesh = ExtResource("15_bd143")
+surface_material_override/0 = SubResource("StandardMaterial3D_i2pmy")
+
+[node name="PebbleRound3" type="MeshInstance3D" parent="StaticBody3D5" unique_id=1690841047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6047125, -1.2357959, -2.111966)
+mesh = ExtResource("17_3be8u")
+surface_material_override/0 = SubResource("StandardMaterial3D_tf3je")
+
+[node name="PebbleSquare4" type="MeshInstance3D" parent="StaticBody3D5" unique_id=54460610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.142602, -1.2347728, 0.010768149)
+mesh = ExtResource("19_h8jpt")
+
+[node name="PebbleSquare1" type="MeshInstance3D" parent="StaticBody3D5" unique_id=1333468526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.708663, -1.2353468, -8.149963)
+mesh = ExtResource("20_sb26o")
+
+[node name="PebbleSquare5" type="MeshInstance3D" parent="StaticBody3D5" unique_id=127543887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085606575, -1.2347728, -10.508556)
+mesh = ExtResource("19_h8jpt")
+
+[node name="PebbleSquare2" type="MeshInstance3D" parent="StaticBody3D5" unique_id=201023864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.810876, -1.2353468, -1.5459034)
+mesh = ExtResource("20_sb26o")
+
+[node name="PebbleSquare6" type="MeshInstance3D" parent="." unique_id=135042048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7259226, -1.2274028, -0.41377953)
+mesh = ExtResource("21_j8peq")
+
+[node name="PebbleRound2" type="MeshInstance3D" parent="." unique_id=537924393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.670882, -1.2345688, 3.973204)
+mesh = ExtResource("22_kpwb8")
+
+[node name="PebbleRound3" type="MeshInstance3D" parent="." unique_id=1530749695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8027906, -1.2345688, -4.0931835)
+mesh = ExtResource("22_kpwb8")
+
+[node name="PebbleRound4" type="MeshInstance3D" parent="." unique_id=104632966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8405714, -1.2357959, -2.6780286)
+mesh = ExtResource("17_3be8u")
+
+[node name="PebbleRound1" type="MeshInstance3D" parent="." unique_id=1513971527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7634897, -1.2297509, -11.074618)
+mesh = ExtResource("23_pj1ly")
+
+[node name="PebbleRound5" type="MeshInstance3D" parent="." unique_id=7290077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3297663, -1.2357959, -6.687636)
+mesh = ExtResource("17_3be8u")
+
+[node name="PebbleRound6" type="MeshInstance3D" parent="." unique_id=76453649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5090647, -1.2357959, -11.735024)
+mesh = ExtResource("17_3be8u")
+
+[node name="PebbleSquare1" type="MeshInstance3D" parent="." unique_id=1850917954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9349146, -1.2353468, -12.536945)
+mesh = ExtResource("20_sb26o")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="." unique_id=1068326659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28461838, -0.6973436, -13.747617)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6" unique_id=1762385429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.946826, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="." unique_id=1841041912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.294959, 0.7036412, 8.633854)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D7" unique_id=1301580160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6481702, 1.465498, -1.9755735)
+shape = SubResource("BoxShape3D_57qmd")
+
+[connection signal="body_entered" from="HippoTrigger1" to="HippoTrigger1" method="_on_body_entered"]
+[connection signal="timeout" from="MemoryTimer" to="." method="_on_memory_timer_timeout"]

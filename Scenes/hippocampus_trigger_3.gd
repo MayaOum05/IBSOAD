@@ -7,3 +7,4 @@ func _on_body_entered(body: Node3D) -> void:
 
 func trigger_event() -> void:
 	print("Player entered final trigger")
+	$AudioStreamPlayer.play()
