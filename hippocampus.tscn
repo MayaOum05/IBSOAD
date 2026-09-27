@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://0d5jhard1jfb"]
+
+[ext_resource type="Script" uid="uid://c6qtyvt3jo1ao" path="res://hippocampus.gd" id="1_8i2qb"]
+[ext_resource type="Script" uid="uid://e43obg5ibbgv" path="res://character_body_3d.gd" id="1_q5mpa"]
+[ext_resource type="Script" uid="uid://b5eru5vbgcts4" path="res://hippo_trigger_1.gd" id="2_o777h"]
+[ext_resource type="AudioStream" uid="uid://bepqkmxfv5o0a" path="res://audio/instructions/room1_instructions.mp3" id="4_l7gy3"]
+[ext_resource type="Script" uid="uid://btkwsvbe21tpw" path="res://memory_timer.gd" id="6_ab41h"]
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57qmd"]
+size = Vector3(27.471436, 5.300659, 1)
+
+[node name="Hippocampus" type="Node3D" unique_id=1214951303]
+script = ExtResource("1_8i2qb")
+
+[node name="MemoryObjects" type="Node3D" parent="." unique_id=829719323]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=272624680]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1747229398]
+environment = SubResource("Environment_g4v7s")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=943811252]
+script = ExtResource("1_q5mpa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2045857479]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1338875518]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1457847898]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2, 2)
+fov = 100.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=94491180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.525433, -1.5140295, -3.9591675)
+use_collision = true
+size = Vector3(23.947464, 0.5527344, 21.577759)
+
+[node name="HippoTrigger1" type="Area3D" parent="." unique_id=1192291982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4604602)
+script = ExtResource("2_o777h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HippoTrigger1" unique_id=768440023]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.4021859, 0, -2.9812713)
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HippoTrigger1" unique_id=1961056751]
+stream = ExtResource("4_l7gy3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=691682853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70261645, 0.7036412, 4.886388)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=495634357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.371826, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1803288933]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.507088, -0.6973436, -1.3984823)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2059183568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6395264, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=872318453]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.9989176, -0.6973436, -1.3984823)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=451910402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6395264, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="MemoryTimer" type="Timer" parent="." unique_id=372848733]
+wait_time = 4.0
+one_shot = true
+script = ExtResource("6_ab41h")
+
+[connection signal="body_entered" from="HippoTrigger1" to="HippoTrigger1" method="_on_body_entered"]
+[connection signal="timeout" from="MemoryTimer" to="." method="_on_memory_timer_timeout"]

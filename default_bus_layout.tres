@@ -1,0 +1,8 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://by427nwecctut"]
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_j3pel"]
+resource_name = "Chorus"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectChorus_j3pel")
+bus/0/effect/0/enabled = false

@@ -1,0 +1,263 @@
+[gd_scene format=3 uid="uid://0d5jhard1jfb"]
+
+[ext_resource type="Script" uid="uid://c6qtyvt3jo1ao" path="res://hippocampus.gd" id="1_8i2qb"]
+[ext_resource type="Script" uid="uid://e43obg5ibbgv" path="res://character_body_3d.gd" id="1_q5mpa"]
+[ext_resource type="Script" uid="uid://b5eru5vbgcts4" path="res://hippo_trigger_1.gd" id="2_o777h"]
+[ext_resource type="AudioStream" uid="uid://bepqkmxfv5o0a" path="res://audio/instructions/room1_instructions.mp3" id="4_l7gy3"]
+[ext_resource type="Script" uid="uid://btkwsvbe21tpw" path="res://memory_timer.gd" id="6_ab41h"]
+[ext_resource type="ArrayMesh" uid="uid://bkbxb6x1qci87" path="res://assets/obj/star.obj" id="6_jfbvb"]
+[ext_resource type="Script" uid="uid://cei8w0owdu3vu" path="res://star.gd" id="7_toj3t"]
+[ext_resource type="Script" uid="uid://c38q6l7uty13x" path="res://area_3d.gd" id="8_8i2qb"]
+[ext_resource type="ArrayMesh" uid="uid://7hgi6aty7x1y" path="res://assets/obj/tree_forest.obj" id="8_cifa8"]
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57qmd"]
+size = Vector3(27.471436, 5.300659, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fcnqv"]
+
+[node name="Hippocampus" type="Node3D" unique_id=1214951303]
+script = ExtResource("1_8i2qb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=272624680]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1747229398]
+environment = SubResource("Environment_g4v7s")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=943811252]
+script = ExtResource("1_q5mpa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2045857479]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1338875518]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1457847898]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2, 2)
+fov = 100.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=94491180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.525433, -1.5140295, -3.9591675)
+use_collision = true
+size = Vector3(23.947464, 0.5527344, 21.577759)
+
+[node name="HippoTrigger1" type="Area3D" parent="." unique_id=1192291982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4604602)
+script = ExtResource("2_o777h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HippoTrigger1" unique_id=768440023]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.4021859, 0, -2.9812713)
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HippoTrigger1" unique_id=1961056751]
+stream = ExtResource("4_l7gy3")
+
+[node name="TreeForest" type="MeshInstance3D" parent="." unique_id=782458687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.371835, -1.3756757, 1.4887428)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest2" type="MeshInstance3D" parent="." unique_id=660784505]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6.7720942, -1.2388039, 2.1321497)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest2" unique_id=1720587883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest2" unique_id=1613029304]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="." unique_id=274700792]
+transform = Transform3D(1.2854743, 0, 0.7730173, 0, 1.5, 0, -0.7730173, 0, 1.2854743, -10.950819, -1.2388039, 1.5081134)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest3" unique_id=1029571637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest3" unique_id=1988427616]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="." unique_id=608189068]
+transform = Transform3D(1.4373616, 0, -0.4289425, 0, 1.5, 0, 0.4289425, 0, 1.4373616, -7.2152433, -1.2388039, 1.5081134)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest4" unique_id=175878752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest4" unique_id=1886259341]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest6" type="MeshInstance3D" parent="." unique_id=1128216604]
+transform = Transform3D(0.37356243, 0, -1.4527391, 0, 1.5, 0, 1.4527391, 0, 0.37356243, -0.68857765, -1.2388039, 2.929912)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest6" unique_id=614164484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest6" unique_id=544877742]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest5" type="MeshInstance3D" parent="." unique_id=1352130242]
+transform = Transform3D(1.4373616, 0, -0.4289425, 0, 1.5, 0, 0.4289425, 0, 1.4373616, 3.3874588, -1.2388039, 1.5081134)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest5" unique_id=861034564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest5" unique_id=89584823]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest7" type="MeshInstance3D" parent="." unique_id=1487820986]
+transform = Transform3D(1.9164821, 0, -0.5719233, 0, 2, 0, 0.5719233, 0, 1.9164821, -2.2526407, -1.1460114, -6.8841605)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest7" unique_id=587647206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest7" unique_id=1365874532]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest8" type="MeshInstance3D" parent="." unique_id=1071063183]
+transform = Transform3D(1.4373616, 0, -0.4289425, 0, 1.5, 0, 0.4289425, 0, 1.4373616, -10.546087, -1.2388039, 5.0523753)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest8" unique_id=1857343111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest8" unique_id=1558573362]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest9" type="MeshInstance3D" parent="." unique_id=1214819854]
+transform = Transform3D(0.55879164, 0, 1.3920317, 0, 1.5, 0, -1.3920317, 0, 0.55879164, -2.954619, -1.2388039, 2.668941)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest9" unique_id=1697986559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest9" unique_id=555829857]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest10" type="MeshInstance3D" parent="." unique_id=2008474834]
+transform = Transform3D(0.55879164, 0, 1.3920317, 0, 1.5, 0, -1.3920317, 0, 0.55879164, -11.267566, -1.2388039, -6.509855)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest10" unique_id=1391759048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest10" unique_id=2038685762]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest11" type="MeshInstance3D" parent="." unique_id=498614113]
+transform = Transform3D(0.55879164, 0, 1.3920317, 0, 1.5, 0, -1.3920317, 0, 0.55879164, -11.267566, -1.2388039, -1.9880786)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest11" unique_id=174247323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest11" unique_id=879849648]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest12" type="MeshInstance3D" parent="." unique_id=157729777]
+transform = Transform3D(0.55879164, 0, 1.3920317, 0, 1.5, 0, -1.3920317, 0, 0.55879164, 7.7638826, -1.2388039, -4.6079774)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest12" unique_id=550544328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest12" unique_id=786755326]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest13" type="MeshInstance3D" parent="." unique_id=1501208966]
+transform = Transform3D(1.4971496, 0, 0.09243041, 0, 1.5, 0, -0.09243041, 0, 1.4971496, 7.7638826, -1.2388039, -7.6654434)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest13" unique_id=733608646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest13" unique_id=1082823118]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest14" type="MeshInstance3D" parent="." unique_id=952214283]
+transform = Transform3D(1.4971496, 0, 0.09243041, 0, 1.5, 0, -0.09243041, 0, 1.4971496, -10.072577, -1.2388039, -10.308037)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest3" type="MeshInstance3D" parent="TreeForest14" unique_id=1298611851]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71605015, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="TreeForest4" type="MeshInstance3D" parent="TreeForest14" unique_id=1059604473]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.78705525, 0, -1.4833823)
+mesh = ExtResource("8_cifa8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=691682853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70261645, 0.7036412, 4.886388)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=495634357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.371826, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1803288933]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10.507088, -0.6973436, -1.3984823)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2059183568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6395264, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=872318453]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.9989176, -0.6973436, -1.3984823)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=451910402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6395264, 1.465498, -0.85797405)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="MemoryTimer" type="Timer" parent="." unique_id=372848733]
+wait_time = 4.0
+script = ExtResource("6_ab41h")
+
+[node name="MemoryObjects" type="Node3D" parent="." unique_id=829719323]
+
+[node name="Star" type="MeshInstance3D" parent="MemoryObjects" unique_id=1769489494]
+transform = Transform3D(0.8375566, 0, -0.5463506, 0, 1, 0, 0.5463506, 0, 0.8375566, 3.259112, -0.70947343, -7.18796)
+mesh = ExtResource("6_jfbvb")
+script = ExtResource("7_toj3t")
+
+[node name="Area3D" type="Area3D" parent="MemoryObjects/Star" unique_id=1674010400]
+transform = Transform3D(0.8375566, 0, 0.5463506, 0, 1, 0, -0.5463506, 0, 0.8375566, 1.1974559, 0.70947343, 7.800941)
+script = ExtResource("8_8i2qb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MemoryObjects/Star" unique_id=1319328252]
+shape = SubResource("BoxShape3D_fcnqv")
+
+[connection signal="body_entered" from="HippoTrigger1" to="HippoTrigger1" method="_on_body_entered"]
+[connection signal="timeout" from="MemoryTimer" to="." method="_on_memory_timer_timeout"]
